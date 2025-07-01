@@ -1,0 +1,497 @@
+[
+    {
+        "id": "1116f30bad2304b7",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "be78b77c5b6be94c",
+        "type": "mqtt-broker",
+        "name": "MQTTBroker",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "id-0000",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "dc8b4b0d674982b8",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "dashboard_tab",
+        "type": "ui_tab",
+        "name": "Pico Sensors",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "dashboard_group",
+        "type": "ui_group",
+        "name": "Sensor Dashboard",
+        "tab": "dashboard_tab",
+        "order": 1,
+        "disp": true,
+        "width": 21,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "mqtt_temp",
+        "type": "mqtt in",
+        "z": "1116f30bad2304b7",
+        "name": "Temperature",
+        "topic": "devices/temp",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "be78b77c5b6be94c",
+        "nl": false,
+        "rap": false,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 340,
+        "wires": [
+            [
+                "gauge_temp",
+                "fn_temp"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_hum",
+        "type": "mqtt in",
+        "z": "1116f30bad2304b7",
+        "name": "Humidity",
+        "topic": "devices/hum",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "be78b77c5b6be94c",
+        "nl": false,
+        "rap": false,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 400,
+        "wires": [
+            [
+                "gauge_hum",
+                "fn_hum"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_light",
+        "type": "mqtt in",
+        "z": "1116f30bad2304b7",
+        "name": "Light",
+        "topic": "devices/light",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "be78b77c5b6be94c",
+        "nl": false,
+        "rap": false,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 460,
+        "wires": [
+            [
+                "gauge_light",
+                "fn_light"
+            ]
+        ]
+    },
+    {
+        "id": "chart_temp",
+        "type": "ui_chart",
+        "z": "1116f30bad2304b7",
+        "name": "Temperature Chart",
+        "group": "dashboard_group",
+        "order": 4,
+        "width": 7,
+        "height": 7,
+        "label": "Temperature Over Time (°C)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-40",
+        "ymax": "60",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff0000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 570,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "chart_hum",
+        "type": "ui_chart",
+        "z": "1116f30bad2304b7",
+        "name": "Humidity Chart",
+        "group": "dashboard_group",
+        "order": 6,
+        "width": 7,
+        "height": 7,
+        "label": "Humidity Over Time (%)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#0000ff",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 570,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "chart_light",
+        "type": "ui_chart",
+        "z": "1116f30bad2304b7",
+        "name": "Light Chart",
+        "group": "dashboard_group",
+        "order": 5,
+        "width": 7,
+        "height": 7,
+        "label": "Light Level Over Time (%)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ffaa00",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000",
+            "#000000"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 570,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "gauge_temp",
+        "type": "ui_gauge",
+        "z": "1116f30bad2304b7",
+        "name": "Temperature Gauge",
+        "group": "dashboard_group",
+        "order": 1,
+        "width": 7,
+        "height": 7,
+        "gtype": "donut",
+        "title": "Current Temperature",
+        "label": "°C",
+        "format": "{{payload.temperature}}",
+        "min": "-40",
+        "max": "125",
+        "colors": [
+            "#00ffff",
+            "#00ff00",
+            "#ff0000"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 400,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "gauge_hum",
+        "type": "ui_gauge",
+        "z": "1116f30bad2304b7",
+        "name": "Humidity Gauge",
+        "group": "dashboard_group",
+        "order": 3,
+        "width": 7,
+        "height": 7,
+        "gtype": "donut",
+        "title": "Current Humidity",
+        "label": "%",
+        "format": "{{payload.humidity}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#ffff00",
+            "#00ff00",
+            "#0000ff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 400,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "gauge_light",
+        "type": "ui_gauge",
+        "z": "1116f30bad2304b7",
+        "name": "Light Gauge",
+        "group": "dashboard_group",
+        "order": 2,
+        "width": 7,
+        "height": 7,
+        "gtype": "donut",
+        "title": "Current Light",
+        "label": "%",
+        "format": "{{payload.light}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#0000ff",
+            "#00ff00",
+            "#ffff00"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 400,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "fn_temp",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Extract Temp",
+        "func": "if (typeof msg.payload === \"object\" && msg.payload.temperature !== undefined) {\n    msg.payload = parseFloat(msg.payload.temperature);\n} else {\n    msg.payload = parseFloat(msg.payload);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "chart_temp"
+            ]
+        ]
+    },
+    {
+        "id": "fn_hum",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Extract Humidity",
+        "func": "if (typeof msg.payload === \"object\" && msg.payload.humidity !== undefined) {\n    msg.payload = parseFloat(msg.payload.humidity);\n} else {\n    msg.payload = parseFloat(msg.payload);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 400,
+        "wires": [
+            [
+                "chart_hum"
+            ]
+        ]
+    },
+    {
+        "id": "fn_light",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Extract Light",
+        "func": "if (typeof msg.payload === \"object\" && msg.payload.light !== undefined) {\n    msg.payload = parseFloat(msg.payload.light);\n} else {\n    msg.payload = parseFloat(msg.payload);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 460,
+        "wires": [
+            [
+                "chart_light"
+            ]
+        ]
+    }
+]
