@@ -19,7 +19,11 @@ dht11_sensor = DHT11(dht11_pin)  # Initialize DHT11 sensor
 i2c = I2C(1,  sda=Pin(14), scl=Pin(15), freq=400000)  # Initialize I2C for LCD display
 devices = i2c.scan()  # Scan for I2C devices
 lcd = I2CLcd(i2c, devices[0], 2, 16)  # Initialize LCD display
-time.sleep(1) # Wait for LCD to initialize    
+time.sleep(1) # Wait for LCD to initialize
+
+humidity = 0  # Initialize humidity variable
+temp = 0  # Initialize temperature variable
+light = 0  # Initialize light variable
 
 # Build json format for MQTT 
 def build_json(variable_1, value_1):
@@ -109,14 +113,15 @@ while True:
         if currentTime - lastDHT11Measure >= 3:
             try:
                 dht11_sensor.measure()  # Trigger DHT11 measurement
-                humidity = dht11_sensor.humidity
+                new_humidity = dht11_sensor.humidity
             except Exception as e:
+                new_humidity = humidity  # Keep the last known humidity value
                 print("DHT11 measurement failed:", e)
-                humidity = 0 # to avoid further errors
+            humidity = new_humidity
             lastDHT11Measure = currentTime
         
-        if currentTime - lastMQTTSend >= 15:
-            # Send data on MQTT every 15 seconds
+        if currentTime - lastMQTTSend >= 10:
+            # Send data on MQTT every 10 seconds
             tempObj = build_json("temperature", temp)
             lightObj = build_json("light", light)
             humidityObj = build_json("humidity", humidity)
