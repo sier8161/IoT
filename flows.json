@@ -156,7 +156,49 @@
         "className": ""
     },
     {
-        "id": "mqtt_temp",
+        "id": "e6ca3ef0cdef0010",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "c59ac60c10fa0149",
+        "type": "inject",
+        "z": "1116f30bad2304b7",
+        "name": "Fetch from database on startup",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 2,
+        "topic": "",
+        "payload": "startup",
+        "payloadType": "str",
+        "x": 150,
+        "y": 520,
+        "wires": [
+            [
+                "313fcfc229c46d64",
+                "b7bd24848f2f441f",
+                "59d68c146b82e5df"
+            ]
+        ]
+    },
+    {
+        "id": "535bf49298c57c05",
         "type": "mqtt in",
         "z": "1116f30bad2304b7",
         "name": "Temperature",
@@ -168,17 +210,18 @@
         "rap": false,
         "rh": 0,
         "inputs": 0,
-        "x": 80,
-        "y": 340,
+        "x": 90,
+        "y": 80,
         "wires": [
             [
-                "gauge_temp",
-                "fn_temp"
+                "f7ee738a5c577b53",
+                "cd06b5c59748f4fd",
+                "c402296191242afa"
             ]
         ]
     },
     {
-        "id": "mqtt_hum",
+        "id": "9b9cca1266c02493",
         "type": "mqtt in",
         "z": "1116f30bad2304b7",
         "name": "Humidity",
@@ -191,16 +234,17 @@
         "rh": 0,
         "inputs": 0,
         "x": 80,
-        "y": 400,
+        "y": 220,
         "wires": [
             [
-                "gauge_hum",
-                "fn_hum"
+                "bd8a015760750285",
+                "9687eac4042b1b21",
+                "27c3a847230c14ba"
             ]
         ]
     },
     {
-        "id": "mqtt_light",
+        "id": "771e2b3546803807",
         "type": "mqtt in",
         "z": "1116f30bad2304b7",
         "name": "Light",
@@ -212,17 +256,18 @@
         "rap": false,
         "rh": 0,
         "inputs": 0,
-        "x": 80,
-        "y": 460,
+        "x": 70,
+        "y": 360,
         "wires": [
             [
-                "gauge_light",
-                "fn_light"
+                "2e8390751434d56a",
+                "16bb5c564342f58b",
+                "1eff8006ef29ebba"
             ]
         ]
     },
     {
-        "id": "chart_temp",
+        "id": "a76354aa418f4a7c",
         "type": "ui_chart",
         "z": "1116f30bad2304b7",
         "name": "Temperature Chart",
@@ -233,7 +278,7 @@
         "label": "Temperature Over Time (°C)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "auto",
+        "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "",
         "dot": false,
@@ -259,14 +304,14 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 570,
-        "y": 340,
+        "x": 910,
+        "y": 480,
         "wires": [
             []
         ]
     },
     {
-        "id": "chart_hum",
+        "id": "e5fe2ace6e1e243e",
         "type": "ui_chart",
         "z": "1116f30bad2304b7",
         "name": "Humidity Chart",
@@ -277,7 +322,7 @@
         "label": "Humidity Over Time (%)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "auto",
+        "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "",
         "dot": false,
@@ -288,7 +333,7 @@
         "removeOlderUnit": "3600",
         "cutout": 0,
         "useOneColor": false,
-        "useUTC": false,
+        "useUTC": true,
         "colors": [
             "#0000ff",
             "#000000",
@@ -303,14 +348,14 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 570,
-        "y": 400,
+        "x": 900,
+        "y": 520,
         "wires": [
             []
         ]
     },
     {
-        "id": "chart_light",
+        "id": "7d55e3fdb6d6618b",
         "type": "ui_chart",
         "z": "1116f30bad2304b7",
         "name": "Light Chart",
@@ -321,7 +366,7 @@
         "label": "Light Level Over Time (%)",
         "chartType": "line",
         "legend": "false",
-        "xformat": "auto",
+        "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "",
         "dot": false,
@@ -332,7 +377,7 @@
         "removeOlderUnit": "3600",
         "cutout": 0,
         "useOneColor": false,
-        "useUTC": false,
+        "useUTC": true,
         "colors": [
             "#ffaa00",
             "#000000",
@@ -347,14 +392,14 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 570,
-        "y": 460,
+        "x": 890,
+        "y": 560,
         "wires": [
             []
         ]
     },
     {
-        "id": "gauge_temp",
+        "id": "f7ee738a5c577b53",
         "type": "ui_gauge",
         "z": "1116f30bad2304b7",
         "name": "Temperature Gauge",
@@ -377,12 +422,12 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 400,
-        "y": 540,
+        "x": 320,
+        "y": 40,
         "wires": []
     },
     {
-        "id": "gauge_hum",
+        "id": "bd8a015760750285",
         "type": "ui_gauge",
         "z": "1116f30bad2304b7",
         "name": "Humidity Gauge",
@@ -405,12 +450,12 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 400,
-        "y": 580,
+        "x": 300,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "gauge_light",
+        "id": "2e8390751434d56a",
         "type": "ui_gauge",
         "z": "1116f30bad2304b7",
         "name": "Light Gauge",
@@ -433,64 +478,298 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 400,
-        "y": 620,
+        "x": 290,
+        "y": 320,
         "wires": []
     },
     {
-        "id": "fn_temp",
+        "id": "cd06b5c59748f4fd",
         "type": "function",
         "z": "1116f30bad2304b7",
-        "name": "Extract Temp",
+        "name": "Format for DB",
         "func": "if (typeof msg.payload === \"object\" && msg.payload.temperature !== undefined) {\n    msg.payload = parseFloat(msg.payload.temperature);\n} else {\n    msg.payload = parseFloat(msg.payload);\n}\nreturn msg;",
         "outputs": 1,
+        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 340,
+        "x": 300,
+        "y": 80,
         "wires": [
             [
-                "chart_temp"
+                "329cdb4ac75e99a9"
             ]
         ]
     },
     {
-        "id": "fn_hum",
+        "id": "9687eac4042b1b21",
         "type": "function",
         "z": "1116f30bad2304b7",
-        "name": "Extract Humidity",
+        "name": "Format for DB",
         "func": "if (typeof msg.payload === \"object\" && msg.payload.humidity !== undefined) {\n    msg.payload = parseFloat(msg.payload.humidity);\n} else {\n    msg.payload = parseFloat(msg.payload);\n}\nreturn msg;",
         "outputs": 1,
+        "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "4efaaa3ce8f9a844"
+            ]
+        ]
+    },
+    {
+        "id": "16bb5c564342f58b",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Format for DB",
+        "func": "if (typeof msg.payload === \"object\" && msg.payload.light !== undefined) {\n    msg.payload = parseFloat(msg.payload.light);\n} else {\n    msg.payload = parseFloat(msg.payload);\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 360,
+        "wires": [
+            [
+                "529bccfbf44def45"
+            ]
+        ]
+    },
+    {
+        "id": "c402296191242afa",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Format for Chart",
+        "func": "// Extract temperature value from MQTT payload\nlet tempValue;\nif (typeof msg.payload === \"object\" && msg.payload.temperature !== undefined) {\n    tempValue = parseFloat(msg.payload.temperature);\n} else {\n    tempValue = parseFloat(msg.payload);\n}\n\n// Format for chart (current timestamp)\nconst chartMsg = {\n    payload: tempValue,\n    timestamp: Date.now(),\n    topic: \"devices/temp\"\n};\n\nreturn chartMsg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 120,
+        "wires": [
+            [
+                "a76354aa418f4a7c"
+            ]
+        ]
+    },
+    {
+        "id": "27c3a847230c14ba",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Format for Chart",
+        "func": "// Extract humidity value from MQTT payload\nlet humValue;\nif (typeof msg.payload === \"object\" && msg.payload.humidity !== undefined) {\n    humValue = parseFloat(msg.payload.humidity);\n} else {\n    humValue = parseFloat(msg.payload);\n}\n\n// Format for chart (current timestamp)\nconst chartMsg = {\n    payload: humValue,\n    timestamp: Date.now(),\n    topic: \"devices/hum\"\n};\n\nreturn chartMsg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 260,
+        "wires": [
+            [
+                "e5fe2ace6e1e243e"
+            ]
+        ]
+    },
+    {
+        "id": "1eff8006ef29ebba",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Format for Chart",
+        "func": "// Extract light value from MQTT payload\nlet lightValue;\nif (typeof msg.payload === \"object\" && msg.payload.light !== undefined) {\n    lightValue = parseFloat(msg.payload.light);\n} else {\n    lightValue = parseFloat(msg.payload);\n}\n\n// Format for chart (current timestamp)\nconst chartMsg = {\n    payload: lightValue,\n    timestamp: Date.now(),\n    topic: \"devices/light\"\n};\n\nreturn chartMsg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
         "y": 400,
         "wires": [
             [
-                "chart_hum"
+                "7d55e3fdb6d6618b"
             ]
         ]
     },
     {
-        "id": "fn_light",
+        "id": "329cdb4ac75e99a9",
+        "type": "influxdb out",
+        "z": "1116f30bad2304b7",
+        "influxdb": "e6ca3ef0cdef0010",
+        "name": "Store Temp",
+        "measurement": "temperature",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "LNU",
+        "bucket": "SleepingMonitor",
+        "x": 470,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4efaaa3ce8f9a844",
+        "type": "influxdb out",
+        "z": "1116f30bad2304b7",
+        "influxdb": "e6ca3ef0cdef0010",
+        "name": "Store Humidity",
+        "measurement": "humidity",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "LNU",
+        "bucket": "SleepingMonitor",
+        "x": 480,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "529bccfbf44def45",
+        "type": "influxdb out",
+        "z": "1116f30bad2304b7",
+        "influxdb": "e6ca3ef0cdef0010",
+        "name": "Store Light",
+        "measurement": "light",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "LNU",
+        "bucket": "SleepingMonitor",
+        "x": 470,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "313fcfc229c46d64",
+        "type": "influxdb in",
+        "z": "1116f30bad2304b7",
+        "influxdb": "e6ca3ef0cdef0010",
+        "name": "Get Temp History",
+        "query": "from(bucket: \"SleepingMonitor\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"temperature\" and r._field == \"value\")\n  |> yield(name: \"temperature\")",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "LNU",
+        "x": 430,
+        "y": 480,
+        "wires": [
+            [
+                "c304eed7beec2f6e"
+            ]
+        ]
+    },
+    {
+        "id": "b7bd24848f2f441f",
+        "type": "influxdb in",
+        "z": "1116f30bad2304b7",
+        "influxdb": "e6ca3ef0cdef0010",
+        "name": "Get Humidity History",
+        "query": "from(bucket: \"SleepingMonitor\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"humidity\" and r._field == \"value\")\n  |> yield(name: \"humidity\")",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "LNU",
+        "x": 440,
+        "y": 520,
+        "wires": [
+            [
+                "4413d3d0f18ba493"
+            ]
+        ]
+    },
+    {
+        "id": "59d68c146b82e5df",
+        "type": "influxdb in",
+        "z": "1116f30bad2304b7",
+        "influxdb": "e6ca3ef0cdef0010",
+        "name": "Get Light History",
+        "query": "from(bucket: \"SleepingMonitor\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"light\" and r._field == \"value\")\n  |> yield(name: \"light\")",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "LNU",
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "620ad1c29832bfcb"
+            ]
+        ]
+    },
+    {
+        "id": "c304eed7beec2f6e",
         "type": "function",
         "z": "1116f30bad2304b7",
-        "name": "Extract Light",
-        "func": "if (typeof msg.payload === \"object\" && msg.payload.light !== undefined) {\n    msg.payload = parseFloat(msg.payload.light);\n} else {\n    msg.payload = parseFloat(msg.payload);\n}\nreturn msg;",
+        "name": "Process Temp History",
+        "func": "if (!Array.isArray(msg.payload)) {\n    return null;\n}\n\n// Send each historical data point to the chart\nmsg.payload.forEach(function(point) {\n    const chartMsg = {\n        payload: parseFloat(point._value),\n        timestamp: new Date(point._time).getTime(),\n        topic: \"devices/temp\"\n    };\n    node.send(chartMsg);\n});\n\nreturn null;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 460,
+        "x": 640,
+        "y": 480,
         "wires": [
             [
-                "chart_light"
+                "a76354aa418f4a7c"
+            ]
+        ]
+    },
+    {
+        "id": "4413d3d0f18ba493",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Process Humidity History",
+        "func": "if (!Array.isArray(msg.payload)) {\n    return null;\n}\n\n// Send each historical data point to the chart\nmsg.payload.forEach(function(point) {\n    const chartMsg = {\n        payload: parseFloat(point._value),\n        timestamp: new Date(point._time).getTime(),\n        topic: \"devices/hum\"\n    };\n    node.send(chartMsg);\n});\n\nreturn null;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 520,
+        "wires": [
+            [
+                "e5fe2ace6e1e243e"
+            ]
+        ]
+    },
+    {
+        "id": "620ad1c29832bfcb",
+        "type": "function",
+        "z": "1116f30bad2304b7",
+        "name": "Process Light History",
+        "func": "if (!Array.isArray(msg.payload)) {\n    return null;\n}\n\n// Send each historical data point to the chart\nmsg.payload.forEach(function(point) {\n    const chartMsg = {\n        payload: parseFloat(point._value),\n        timestamp: new Date(point._time).getTime(),\n        topic: \"devices/light\"\n    };\n    node.send(chartMsg);\n});\n\nreturn null;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 560,
+        "wires": [
+            [
+                "7d55e3fdb6d6618b"
             ]
         ]
     }
